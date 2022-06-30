@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Resep extends Model
 {
     use HasFactory;
-    protected $table = 'metamata';
+    protected $table = 'resep';
     protected $guarded = [];
+    public $timestamps = false;
 }

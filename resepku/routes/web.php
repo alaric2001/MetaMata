@@ -22,7 +22,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('resep',[ResepController::class, 'index']);
-Route::post('produksi_',[ResepController::class, 'post']);
+Route::get('addresep',[ResepController::class, 'inputpage']);
+Route::post('add_resep',[ResepController::class, 'inputdata']);
 Route::put('produksi/{id}',[ResepController::class, 'put']);
 Route::delete('produksi/{id}',[ResepController::class, 'delete']);
 Route::get('produksi/{id}',[ResepController::class, 'detail']);
