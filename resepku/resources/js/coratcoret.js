@@ -1,3 +1,10 @@
+//new 
+$(document).on('click', '.remove_item_btn', function(e){
+    e.preventDefault();
+    let tempatinput = $(this).parent().parent();
+    $(tempatinput).remove();
+});
+
 $(document).ready(function(){
             $(".add_item_btn").click(function(e){
                 e.preventDefault();

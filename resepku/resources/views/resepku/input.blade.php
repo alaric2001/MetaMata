@@ -28,13 +28,12 @@
             
             <div class="form-group pt-3">
                 <label>Bahan-bahan</label>
-                <div id="show_item">
-                    <div style="padding-bottom:8px">
-                        <input type="text" class="form-control" name="bahan[0]" placeholder="">
-                        <div>
-                            <a href="" class="add_item_btn" id="add_item_btn" style="font-family: 'Ubuntu'; font-style: normal; font-weight: 400; font-size: 14px;
-                            line-height: 21px; text-decoration: none; color:black">+ Item Bahan</a>
-                        </div>
+                <div>
+                    <input type="text" class="form-control" name="bahan[0]" style="margin-bottom:8px">
+                    <div id="show_item"> </div>
+                    <div>
+                        <a href="" id="add_item_btn" style="font-family: 'Ubuntu'; font-style: normal; font-weight: 400; font-size: 14px;
+                        line-height: 21px; text-decoration: none; color:black">+ Item Bahan</a>
                     </div>
                 </div>
             </div>
@@ -44,8 +43,14 @@
             
             <div class="form-group pt-3">
                 <label>Langkah Pembuatan</label>
-                <input type="text" class="form-control" name="carabuat" placeholder="">
-                
+                <div>
+                    <input type="text" class="form-control" name="carabuat[0]"style="margin-bottom:8px">
+                    <div id="item_tambahan"> </div>
+                    <div>
+                        <a href="" id="item_tambah" style="font-family: 'Ubuntu'; font-style: normal; font-weight: 400; font-size: 14px;
+                        line-height: 21px; text-decoration: none; color:black">+ Item Langkah</a>
+                    </div>
+                </div>
             </div>
             @error('carabuat')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -69,31 +74,59 @@
 @endsection
 
 
-
 @section('script')
     <script type="text/javascript">
-        
         $(document).ready(function(){
             var i = 0;
             $("#add_item_btn").click(function(e){
                 e.preventDefault();
             ++i;
-            $("#show_item").prepend(` 
-            <div style="padding-bottom:8px">
-                <input type="text" class="form-control" name="bahan[`+i+`]" placeholder="">
-            </div>
-            @error('bahan[`+i+`]')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror`);
-                });
-
-                $(document).on('click', '.remove_item_btn', function(e){
-                    e.preventDefault();
-                    let tempatinput = $(this).parent().parent();
-                    $(tempatinput).remove();
-                });
-
+            if (i < 10 ) {
+                
+                $("#show_item").append(` 
+                    <div style="padding-bottom:8px">
+                        <input type="text" class="form-control" name="bahan[`+i+`]" placeholder="">
+                    </div>
+                    @error('bahan[`+i+`]')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror`);
+                } else {
+                    $("#show_item").append(` 
+                    <div style="padding-bottom:8px">
+                        <input type="text" class="form-control" disabled>
+                    </div>
+                    @error('bahan[`+i+`]')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror`);
+                }
+            });
         });
         
+
+        $(document).ready(function(){
+            var i = 0;
+            $("#item_tambah").click(function(e){
+                e.preventDefault();
+            ++i;
+            if (i < 10 ) {
+                
+                $("#item_tambahan").append(` 
+                    <div style="padding-bottom:8px">
+                        <input type="text" class="form-control" name="carabuat[`+i+`]" placeholder="">
+                    </div>
+                    @error('carabuat[`+i+`]')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror`);
+                } else {
+                    $("#item_tambahan").append(` 
+                    <div style="padding-bottom:8px">
+                        <input type="text" class="form-control" disabled>
+                    </div>
+                    @error('carabuat[`+i+`]')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror`);
+                }
+            });
+        });
     </script>
 @endsection
